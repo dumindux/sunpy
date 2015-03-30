@@ -419,12 +419,11 @@ class JSOCClient(object):
             for url in urls:
                 downloader.download(url, callback=results.require([url]),
                                     errback=lambda x: print(x), path=path)
-
         else:
             #Make Results think it has finished.
             results.require([])
+            results.poke()
 
-        results.poke()
         return results
 
     def _process_time(self, time):
